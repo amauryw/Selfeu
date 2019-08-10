@@ -1,15 +1,15 @@
 import React from "react";
 import styled from "styled-components";
+import { getAvailableTasks } from "../../api/api";
 
-export const Home = props => {
-  const navToTask = () => {
-    props.navigation.navigate("addNewTask");
-  };
+export const Tasks = () => {
+  const tasks = getAvailableTasks();
 
   return (
     <Container>
-      <WelcomeText>Ajouter une nouvelle tache:</WelcomeText>
-      <Button onPresss={navToTask}>Add</Button>
+      {tasks.map(task => (
+        <WelcomeText>{task.name}</WelcomeText>
+      ))}
     </Container>
   );
 };
