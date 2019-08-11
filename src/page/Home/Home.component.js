@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Button } from "react-native";
 
 export const Home = props => {
   const navToTask = () => {
@@ -9,7 +10,7 @@ export const Home = props => {
   return (
     <Container>
       <WelcomeText>Ajouter une nouvelle tache:</WelcomeText>
-      <Button onPresss={navToTask}>Add</Button>
+      <Button title="Add" onPress={navToTask} />
     </Container>
   );
 };

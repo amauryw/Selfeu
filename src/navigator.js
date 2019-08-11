@@ -18,7 +18,7 @@ const tabNavigator = createBottomTabNavigator(
   }
 );
 
-export const navigator = createStackNavigator(
+export const Navigator = createStackNavigator(
   {
     launch: tabNavigator,
     addNewTask: AddNewTask

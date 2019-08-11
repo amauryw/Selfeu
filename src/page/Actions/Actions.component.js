@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { getActionById } from "../../api/api";
 
 export const Actions = () => {
-  const { actions, setActions } = useState([]);
-  const { selectedUser } = useState(0);
+  const [actions, setActions] = useState([]);
+  const [selectedUser] = useState(0);
 
   useEffect(async () => {
     const result = await getActionById(selectedUser);

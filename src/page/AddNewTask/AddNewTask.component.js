@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-
+import { Button } from "react-native";
 import { createNewAction } from "../../api/api";
 
 export const AddNewTask = props => {
@@ -8,14 +8,18 @@ export const AddNewTask = props => {
     props.navigation.goBack();
   };
 
-  const createNewAction = async () => {
+  const createNewAction2 = async () => {
     await createNewAction();
   };
 
   return (
     <Container>
-      <Button onPresss={goBack}>Retour</Button>
-      <Button onPresss={createNewAction}>Do it</Button>
+      <Button title="retour" onPress={goBack}>
+        Retour
+      </Button>
+      <Button title="Do it" onPress={createNewAction2}>
+        Do it
+      </Button>
     </Container>
   );
 };
