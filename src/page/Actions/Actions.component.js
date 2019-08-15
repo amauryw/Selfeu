@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { getActionById } from "../../api/api";
+import theme from "../../theme";
 
 export const Actions = () => {
   const [actions, setActions] = useState([]);
@@ -26,6 +27,7 @@ const Container = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
+  background-color: ${theme.darkBackground};
 `;
 const ActionText = styled.Text`
   font-size: 40;

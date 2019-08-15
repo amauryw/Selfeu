@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Button } from "react-native";
 import { createNewAction } from "../../api/api";
+import theme from "../../theme";
 
 export const AddNewTask = props => {
   const goBack = () => {
@@ -12,14 +13,11 @@ export const AddNewTask = props => {
     await createNewAction();
   };
 
+  const task = props.navigation.getParam("task", null);
   return (
     <Container>
-      <Button title="retour" onPress={goBack}>
-        Retour
-      </Button>
-      <Button title="Do it" onPress={createNewAction2}>
-        Do it
-      </Button>
+      <Button title={task.name} onPress={goBack} />
+      <Button title="Do it" onPress={createNewAction2} />
     </Container>
   );
 };
@@ -28,7 +26,5 @@ const Container = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
-`;
-const WelcomeText = styled.Text`
-  font-size: 40;
+  background-color: ${theme.darkBackground};
 `;
