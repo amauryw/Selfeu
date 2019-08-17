@@ -10,6 +10,10 @@ export const useMyStore = () => {
 
   const isLoading = state.isLoading;
 
+  const setMe = newMe => {
+    setState(oldState => ({ ...oldState, me: newMe }));
+  };
+
   const setLoading = value => {
     setState(oldState => ({ ...oldState, isLoading: value }));
   };
@@ -32,6 +36,7 @@ export const useMyStore = () => {
 
   return {
     me,
+    setMe,
     isLoading,
     myMonthlyTodos,
     loadMyMonthlyTodos

@@ -4,10 +4,10 @@ import { ActivityIndicator } from "react-native";
 import theme from "../../theme";
 import { useMyStore } from "../../module/me";
 import { MyTodos } from "../../components/MyTodos";
+import { ChooseMe } from "../../components/ChooseMe";
 
 export const Home = () => {
   const {
-    me,
     isLoading: isMyTodosLoading,
     loadMyMonthlyTodos,
     myMonthlyTodos
@@ -30,11 +30,9 @@ export const Home = () => {
 
   return (
     <Container>
-      <TextContainer>
-        <HorizontalContainer>
-          <WelcomeText>Je suis {me.name}</WelcomeText>
-        </HorizontalContainer>
-      </TextContainer>
+      <ChooseMeContainer>
+        <ChooseMe />
+      </ChooseMeContainer>
 
       <MyMonthlyTodosContainer>
         {renderPersonalActions()}
@@ -46,16 +44,12 @@ export const Home = () => {
 // level 0
 const Container = styled.View`
   flex: 1;
-  align-items: center;
-  justify-content: center;
   background-color: ${theme.darkBackground};
 `;
 
 // level 1
-const TextContainer = styled.View`
+const ChooseMeContainer = styled.View`
   flex: 1;
-  flex-direction: row;
-  background-color: ${theme.lightDarkBackground};
 `;
 // level 1
 const MyMonthlyTodosContainer = styled.View`
@@ -63,22 +57,11 @@ const MyMonthlyTodosContainer = styled.View`
   flex-direction: row;
 `;
 
-// level 2
-
-const HorizontalContainer = styled.View`
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-`;
-
-const WelcomeText = styled.Text`
-  font-size: 40;
-  color: ${theme.lightText};
-`;
-
 const EmptyText = styled.Text`
   font-size: 20;
   color: ${theme.lightText};
 `;
 
-const Loader = styled(ActivityIndicator)``;
+const Loader = styled(ActivityIndicator)`
+  flex: 1;
+`;

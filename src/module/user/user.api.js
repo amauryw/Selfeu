@@ -5,17 +5,20 @@ export const queryUsers = async () =>
         resolve([
           {
             id: 1,
-            name: "Amo"
+            name: "Amo",
+            iconName: "whatshot"
           },
           {
             id: 2,
-            name: "Fifi"
+            name: "Fifi",
+            iconName: "local-hotel"
           },
           {
             id: 3,
-            name: "Tutu"
+            name: "Tutu",
+            iconName: "local-bar"
           }
         ]),
-      0
+      100
     )
   );

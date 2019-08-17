@@ -16,7 +16,7 @@ const TodoContainer = styled(TouchableOpacity)`
   align-items: center;
   justify-content: center;
   background-color: ${({ selected }) =>
-    selected ? "gold" : theme.lightDarkBackground};
+    selected ? theme.validated : theme.lightDarkBackground};
 `;
 
 const TodoTextName = styled.Text`
