@@ -1,5 +1,3 @@
-import { red } from "ansi-colors";
-
 export const queryMyMonthlyTodos = async userId =>
   new Promise(resolve =>
     setTimeout(
@@ -25,8 +23,22 @@ export const queryMyMonthlyTodos = async userId =>
             color: "green",
             duration: 30,
             date: new Date()
+          },
+          {
+            id: 4,
+            name: "lollil",
+            color: "gold",
+            duration: 30,
+            date: new Date()
+          },
+          {
+            id: 5,
+            name: "Bonjour",
+            color: "pink",
+            duration: 30,
+            date: new Date()
           }
         ]),
-      300
+      0
     )
   );

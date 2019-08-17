@@ -80,27 +80,38 @@ export const MyTodos = ({ cards }) => {
     }
   };
 
+  const INITIAL_DEG = cards.length > 3 ? 20 : cards.length > 1 ? 15 : 0;
+  const PREZ_DEG = cards.length > 3 ? 10 : cards.length > 1 ? 15 : 0;
   useCode(
     block([
       cond(eq(selectedCard, INITIAL_INDEX), [
         timing(animation, clock),
-        set(cardRotations[0], bInterpolate(animation, 0, -15)),
-        set(cardRotations[2], bInterpolate(animation, 0, 15))
+        ...cards.map((card, index) =>
+          set(
+            cardRotations[index],
+            bInterpolate(animation, 0, INITIAL_DEG - PREZ_DEG * index)
+          )
+        )
       ]),
       cond(
-        and(neq(selectedCard, INITIAL_INDEX), not(isGroupingAnimationDone)),
+        and(
+          neq(selectedCard, INITIAL_INDEX),
+          not(isGroupingAnimationDone),
+          not(cards.length <= 1)
+        ),
         [
           timing(animation, clock),
           set(translateX, bInterpolate(animation, translateX, 0)),
-          set(
-            cardRotations[0],
-            bInterpolate(animation, cardRotations[0], -15 / 2)
+          ...cards.map((card, index) =>
+            set(
+              cardRotations[index],
+              bInterpolate(
+                animation,
+                cardRotations[index],
+                (15 / 2) * ((index % 3) - 1)
+              )
+            )
           ),
-          set(
-            cardRotations[1],
-            bInterpolate(animation, cardRotations[2], 15 / 2)
-          ),
-          set(cardRotations[2], bInterpolate(animation, cardRotations[2], 0)),
           cond(not(clockRunning(clock)), set(isGroupingAnimationDone, 1))
         ]
       ),

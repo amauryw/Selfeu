@@ -6,46 +6,26 @@ import { useMyStore } from "../../module/me";
 import { MyTodos } from "../../components/MyTodos";
 
 export const Home = () => {
-  const { me, isLoading: isMyTodosLoading, loadMyMonthlyTodos } = useMyStore();
+  const {
+    me,
+    isLoading: isMyTodosLoading,
+    loadMyMonthlyTodos,
+    myMonthlyTodos
+  } = useMyStore();
 
   useEffect(() => {
     loadMyMonthlyTodos();
   }, []);
 
-  const myMonthlyTodos = [
-    {
-      id: 1,
-      name: "Cuisine",
-      color: "red",
-      duration: 30,
-      date: new Date()
-    },
-    {
-      id: 2,
-      name: "Salon",
-      color: "blue",
-      duration: 30,
-      date: new Date()
-    },
-    {
-      id: 3,
-      name: "Qwack",
-      color: "green",
-      duration: 30,
-      date: new Date()
-    }
-  ];
-
   const renderPersonalActions = () => {
-    return <MyTodos cards={myMonthlyTodos} />;
-    // if (isMyTodosLoading) {
-    //   return <Loader color={theme.lightDarkBackground} size={40} />;
-    // }
+    if (isMyTodosLoading) {
+      return <Loader color={theme.lightDarkBackground} size={40} />;
+    }
 
-    // if (myMonthlyTodos.length <= 0) {
-    //   return <EmptyText>Bravo, tu as tout fait pour ce mois !</EmptyText>;
-    // }
-    // return <MyTodos items={myMonthlyTodos} />;
+    if (myMonthlyTodos.length <= 0) {
+      return <EmptyText>Bravo, tu as tout fait pour ce mois !</EmptyText>;
+    }
+    return <MyTodos cards={myMonthlyTodos} />;
   };
 
   return (
