@@ -13,6 +13,7 @@ const ActionContainer = styled.View`
   flex-direction: row;
   border-radius: 10px;
   margin: 10px;
+  height: 50px;
   background-color: ${theme.lightDarkBackground};
 `;
 

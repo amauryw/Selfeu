@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { ActivityIndicator } from "react-native";
 import styled from "styled-components";
 import theme from "../../theme";
 import { Action } from "./components/Action";
@@ -37,23 +38,29 @@ export const Actions = () => {
   useEffect(() => {
     setUserSelection(users.map(user => ({ ...user, selected: false })));
   }, [users]);
-  console.log("render");
+
   return (
     <Container>
       <ToggleContainer>
         {isUserStoreLoading ? (
-          <LoadingText>Loading users ...</LoadingText>
+          <LoadingContainer>
+            <Loader color={theme.main} size={40} />
+          </LoadingContainer>
         ) : (
           <Toggle userSelection={userSelection} onToggle={toggleUser} />
         )}
       </ToggleContainer>
       <ActionsContainer>
         {isActionStoreLoading ? (
-          <LoadingText>Loading actions ...</LoadingText>
+          <LoadingContainer>
+            <Loader color={theme.lightDarkBackground} size={100} />
+          </LoadingContainer>
         ) : (
-          filteredByUserActions.map(action => (
-            <Action action={action} key={action.id} />
-          ))
+          <ScrollViewContainer>
+            {filteredByUserActions.map(action => (
+              <Action action={action} key={action.id} />
+            ))}
+          </ScrollViewContainer>
         )}
       </ActionsContainer>
     </Container>
@@ -65,10 +72,13 @@ const Container = styled.View`
   background-color: ${theme.darkBackground};
 `;
 
-const ActionsContainer = styled.ScrollView`
+const ActionsContainer = styled.View`
   flex: 5;
+  flex-direction: row;
   background-color: ${theme.darkBackground};
+  justify-content: center;
 `;
+
 const ToggleContainer = styled.View`
   flex: 1;
   align-items: center;
@@ -77,7 +87,17 @@ const ToggleContainer = styled.View`
   elevation: 4;
   border-radius: 5px;
 `;
+const ScrollViewContainer = styled.ScrollView`
+  flex: 1;
+`;
 
+const LoadingContainer = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+`;
 const LoadingText = styled.Text`
   color: white;
 `;
+
+const Loader = styled(ActivityIndicator)``;

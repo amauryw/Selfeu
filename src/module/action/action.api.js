@@ -68,6 +68,6 @@ export const queryActions = async () =>
             date: new Date()
           }
         ]),
-      2000
+      100
     )
   );
