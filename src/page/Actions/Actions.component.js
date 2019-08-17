@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { ActivityIndicator } from "react-native";
+import { ActivityIndicator, Text } from "react-native";
 import styled from "styled-components";
 import theme from "../../theme";
 import { Action } from "./components/Action";
 import { Toggle } from "./components/Toggle";
 import { useUserStore } from "../../module/user";
 import { useActionStore } from "../../module/action";
+import { useMyStore } from "../../module/me";
 
 export const Actions = props => {
+  const { me } = useMyStore();
   const { isLoading: isUserStoreLoading, users, loadUsers } = useUserStore();
   const {
     isLoading: isActionStoreLoading,
@@ -54,6 +56,7 @@ export const Actions = props => {
           <Toggle userSelection={userSelection} onToggle={toggleUser} />
         )}
       </ToggleContainer>
+      <Text>{me.name}</Text>
       <ActionsContainer>
         {isActionStoreLoading ? (
           <LoadingContainer>
