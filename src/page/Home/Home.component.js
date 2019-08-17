@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { ActivityIndicator } from "react-native";
 import theme from "../../theme";
 import { useMyStore } from "../../module/me";
+import { MyTodos } from "../../components/MyTodoTask/MyTodos.component/MyTodos";
 
 export const Home = () => {
   const {
@@ -24,14 +25,9 @@ export const Home = () => {
     if (myMonthlyTodos.length <= 0) {
       return <EmptyText>Bravo, tu as tout fait pour ce mois !</EmptyText>;
     }
-    return (
-      <React.Fragment>
-        {myMonthlyTodos.map(item => (
-          <PersonalAction key={item.id}>{item.name}</PersonalAction>
-        ))}
-      </React.Fragment>
-    );
+    return <MyTodos items={myMonthlyTodos} />;
   };
+
   return (
     <Container>
       <TextContainer>
@@ -41,9 +37,7 @@ export const Home = () => {
       </TextContainer>
 
       <MyMonthlyTodosContainer>
-        <MyMonthlyTodosHorizontalContainer>
-          {renderPersonalActions()}
-        </MyMonthlyTodosHorizontalContainer>
+        {renderPersonalActions()}
       </MyMonthlyTodosContainer>
     </Container>
   );
@@ -70,21 +64,11 @@ const MyMonthlyTodosContainer = styled.View`
 `;
 
 // level 2
-const MyMonthlyTodosHorizontalContainer = styled.View`
-  align-items: center;
-  flex: 1;
-`;
 
-// level 2
 const HorizontalContainer = styled.View`
   justify-content: center;
   align-items: center;
   flex: 1;
-`;
-
-const PersonalAction = styled.Text`
-  font-size: 20px;
-  color: ${theme.lightText};
 `;
 
 const WelcomeText = styled.Text`
