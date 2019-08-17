@@ -1,9 +1,17 @@
-import { useContext } from "react";
-import { MyContext } from "./me.context";
+import { useState } from "react";
 import { queryMyMonthlyTodos } from "./me.api";
 
+const initialState = {
+  me: {
+    id: 1,
+    name: "Amaury"
+  },
+  myMonthlyTodos: [],
+  isLoading: false
+};
+
 export const useMyStore = () => {
-  const [state, setState] = useContext(MyContext);
+  const [state, setState] = useState(initialState);
 
   const me = state.me;
   const myMonthlyTodos = state.myMonthlyTodos;

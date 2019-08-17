@@ -1,9 +1,12 @@
-import { useContext } from "react";
-import { TaskContext } from "./task.context";
+import { useState } from "react";
 import { queryTasks } from "./task.api";
 
+const initialState = {
+  tasks: [],
+  isLoading: false
+};
 export const useTaskStore = () => {
-  const [state, setState] = useContext(TaskContext);
+  const [state, setState] = useState(initialState);
 
   const tasks = state.tasks;
   const isLoading = state.isLoading;

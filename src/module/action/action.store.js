@@ -1,10 +1,16 @@
 import { queryActions } from "./action.api";
 
-import { useContext } from "react";
-import { ActionContext } from "./action.context";
+import { useState } from "react";
+
+const initialState = {
+  filteredByUserActions: [],
+  actions: [],
+  filteringUserIds: [],
+  isLoading: false
+};
 
 export const useActionStore = () => {
-  const [state, setState] = useContext(ActionContext);
+  const [state, setState] = useState(initialState);
 
   const actions = state.actions;
   const isLoading = state.isLoading;

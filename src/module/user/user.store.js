@@ -1,9 +1,12 @@
-import { useContext } from "react";
-import { UserContext } from "./user.context";
+import { useState } from "react";
 import { queryUsers } from "./user.api";
+const initialState = {
+  users: [],
+  isLoading: false
+};
 
 export const useUserStore = () => {
-  const [state, setState] = useContext(UserContext);
+  const [state, setState] = useState(initialState);
 
   const users = state.users;
 
