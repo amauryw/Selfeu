@@ -7,7 +7,7 @@ import {
 import { Home } from "./page/Home";
 import { Tasks } from "./page/Tasks";
 import { Actions } from "./page/Actions";
-import { AddNewTask } from "./page/AddNewTask";
+import { TaskDescription } from "./page/TaskDescription";
 import theme from "./theme";
 import TabIcons from "./components/Icon/TabIcons";
 import { TabBar } from "./components/TabBar";
@@ -56,7 +56,7 @@ const tabNavigator = createBottomTabNavigator(
 export const Navigator = createStackNavigator(
   {
     launch: tabNavigator,
-    addNewTask: AddNewTask
+    taskDescription: TaskDescription
   },
   {
     headerMode: "none",

@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import { getAvailableTasks } from "../../api/api";
+import { ActivityIndicator } from "react-native";
 import theme from "../../theme";
 import { Task } from "./components/Task";
+import { useTaskStore } from "../../module/task";
 
 export const Tasks = props => {
-  const tasks = getAvailableTasks();
+  const { tasks, loadTasks, isLoading } = useTaskStore();
+
+  useEffect(() => {
+    loadTasks();
+  }, []);
 
   const navToTask = task => {
-    props.navigation.navigate("addNewTask", {
+    props.navigation.navigate("taskDescription", {
       task
     });
   };
@@ -16,6 +21,7 @@ export const Tasks = props => {
   return (
     <Container>
       <TasksContainer>
+        {isLoading && <Loader color={theme.lightDarkBackground} size={40} />}
         {tasks.map(task => (
           <Task
             label={task.name}
@@ -36,4 +42,7 @@ const Container = styled.ScrollView`
 const TasksContainer = styled.View`
   flex: 1;
   align-items: center;
+`;
+const Loader = styled(ActivityIndicator)`
+  flex: 1;
 `;

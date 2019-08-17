@@ -1,4 +1,4 @@
-export const getAvailableTasks = () => [
+export const queryTasks = async () => [
   {
     id: 0,
     name: "Salon",
@@ -15,9 +15,7 @@ export const getAvailableTasks = () => [
   {
     id: 2,
     name: "Autre",
-    description: "Sucer ses colocs",
-    duration: 30
+    description: "Payer un coup à ses colocs",
+    duration: "♾"
   }
 ];
-
-export const createNewAction = () => {};
