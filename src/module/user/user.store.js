@@ -22,11 +22,11 @@ export const useUserStore = () => {
   };
 
   const setLoading = value => {
-    setState(old => ({ ...old, isLoading: value }));
+    setState(oldState => ({ ...oldState, isLoading: value }));
   };
 
   const setUsers = newUsers => {
-    setState(old => ({ ...old, users: newUsers }));
+    setState(oldState => ({ ...oldState, users: newUsers }));
   };
 
   return {

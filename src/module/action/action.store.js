@@ -12,17 +12,17 @@ export const useActionStore = () => {
   const filteringUserIds = state.filteringUserIds;
 
   const setFilteredByUserActions = newActions => {
-    setState(old => ({
-      ...old,
+    setState(oldState => ({
+      ...oldState,
       filteredByUserActions: newActions
     }));
   };
   const setLoading = value => {
-    setState(old => ({ ...old, isLoading: value }));
+    setState(oldState => ({ ...oldState, isLoading: value }));
   };
 
   const setActions = newActions => {
-    setState(old => ({ ...old, actions: newActions }));
+    setState(oldState => ({ ...oldState, actions: newActions }));
   };
 
   const loadActions = async () => {
@@ -45,7 +45,7 @@ export const useActionStore = () => {
     const filteredAction = actions.filter(action =>
       userIds.includes(action.userId)
     );
-    setState(old => ({ ...old, filteringUserIds: userIds }));
+    setState(oldState => ({ ...oldState, filteringUserIds: userIds }));
     setFilteredByUserActions(filteredAction);
   };
 

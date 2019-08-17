@@ -1,31 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import theme from "../../theme";
 import { useMyStore } from "../../module/me";
 
 export const Home = () => {
-  const { me, myMonthlyActions, myWeeklyActions } = useMyStore();
+  const {
+    me,
+    myMonthlyTodos,
+    isLoading: isMyTodosLoading,
+    loadMyMonthlyTodos
+  } = useMyStore();
+
+  useEffect(() => {
+    loadMyMonthlyTodos();
+  }, []);
+
   return (
     <Container>
       <WelcomeText>Je suis {me.name}</WelcomeText>
-      <MyWeeklyActionsContainer>
-        {myWeeklyActions.length > 0 ? (
-          myWeeklyActions.map(action => (
-            <PersonalAction key={action.id}>{action.name}</PersonalAction>
-          ))
-        ) : (
-          <WelcomeText>Bravo, tu as tout fait pour cette semaine !</WelcomeText>
-        )}
-      </MyWeeklyActionsContainer>
-      <MyMonthlyActionsContainer>
-        {myMonthlyActions.length > 0 ? (
-          myMonthlyActions.map(action => (
+
+      <MyMonthlyTodosContainer>
+        {myMonthlyTodos.length > 0 ? (
+          myMonthlyTodos.map(action => (
             <PersonalAction key={action.id}>{action.name}</PersonalAction>
           ))
         ) : (
           <WelcomeText>Bravo, tu as tout fait pour ce mois !</WelcomeText>
         )}
-      </MyMonthlyActionsContainer>
+      </MyMonthlyTodosContainer>
     </Container>
   );
 };
@@ -37,13 +39,7 @@ const Container = styled.View`
   background-color: ${theme.darkBackground};
 `;
 
-const MyWeeklyActionsContainer = styled.View`
-  align-items: center;
-  justify-content: center;
-  background-color: ${theme.lightDarkBackground};
-`;
-
-const MyMonthlyActionsContainer = styled.View`
+const MyMonthlyTodosContainer = styled.View`
   align-items: center;
   justify-content: center;
   background-color: ${theme.lightDarkBackground};

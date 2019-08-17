@@ -4,10 +4,11 @@ export const MyContext = createContext([{}, () => {}]);
 
 const initialState = {
   me: {
+    id: 1,
     name: "Amaury"
   },
-  myMonthlyActions: [{ id: 1, name: "action 1" }, { id: 2, name: "action 2" }],
-  myWeeklyActions: []
+  myMonthlyTodos: [{ id: 1, name: "action 1" }, { id: 2, name: "action 2" }],
+  isLoading: false
 };
 
 export const MyContextProvider = props => {
