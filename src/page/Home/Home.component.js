@@ -3,29 +3,49 @@ import styled from "styled-components";
 import { ActivityIndicator } from "react-native";
 import theme from "../../theme";
 import { useMyStore } from "../../module/me";
-import { MyTodos } from "../../components/MyTodoTask/MyTodos.component/MyTodos";
+import { MyTodos } from "../../components/MyTodos";
 
 export const Home = () => {
-  const {
-    me,
-    myMonthlyTodos,
-    isLoading: isMyTodosLoading,
-    loadMyMonthlyTodos
-  } = useMyStore();
+  const { me, isLoading: isMyTodosLoading, loadMyMonthlyTodos } = useMyStore();
 
   useEffect(() => {
     loadMyMonthlyTodos();
   }, []);
 
-  const renderPersonalActions = () => {
-    if (isMyTodosLoading) {
-      return <Loader color={theme.lightDarkBackground} size={40} />;
+  const myMonthlyTodos = [
+    {
+      id: 1,
+      name: "Cuisine",
+      color: "red",
+      duration: 30,
+      date: new Date()
+    },
+    {
+      id: 2,
+      name: "Salon",
+      color: "blue",
+      duration: 30,
+      date: new Date()
+    },
+    {
+      id: 3,
+      name: "Qwack",
+      color: "green",
+      duration: 30,
+      date: new Date()
     }
+  ];
 
-    if (myMonthlyTodos.length <= 0) {
-      return <EmptyText>Bravo, tu as tout fait pour ce mois !</EmptyText>;
-    }
-    return <MyTodos items={myMonthlyTodos} />;
+  const renderPersonalActions = () => {
+    return <MyTodos cards={myMonthlyTodos} />;
+    // if (isMyTodosLoading) {
+    //   return <Loader color={theme.lightDarkBackground} size={40} />;
+    // }
+
+    // if (myMonthlyTodos.length <= 0) {
+    //   return <EmptyText>Bravo, tu as tout fait pour ce mois !</EmptyText>;
+    // }
+    // return <MyTodos items={myMonthlyTodos} />;
   };
 
   return (
@@ -59,7 +79,7 @@ const TextContainer = styled.View`
 `;
 // level 1
 const MyMonthlyTodosContainer = styled.View`
-  flex: 1;
+  flex: 5;
   flex-direction: row;
 `;
 

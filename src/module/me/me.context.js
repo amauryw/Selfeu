@@ -7,7 +7,7 @@ const initialState = {
     id: 1,
     name: "Amaury"
   },
-  myMonthlyTodos: [{ id: 1, name: "action 1" }, { id: 2, name: "action 2" }],
+  myMonthlyTodos: [],
   isLoading: false
 };
 
