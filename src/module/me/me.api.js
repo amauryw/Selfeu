@@ -1,22 +1,22 @@
-export const queryMyAction = async userId =>
+export const queryMyMonthlyTodos = async userId =>
   new Promise(resolve =>
     setTimeout(
       () =>
         resolve([
           {
-            id: 8,
+            id: 1,
             name: "Cuisine",
             duration: 30,
             date: new Date()
           },
           {
-            id: 8,
+            id: 2,
             name: "Salon",
             duration: 30,
             date: new Date()
           },
           {
-            id: 8,
+            id: 3,
             name: "Qwack",
             duration: 30,
             date: new Date()

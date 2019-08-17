@@ -96,8 +96,5 @@ const LoadingContainer = styled.View`
   align-items: center;
   justify-content: center;
 `;
-const LoadingText = styled.Text`
-  color: white;
-`;
 
 const Loader = styled(ActivityIndicator)``;
