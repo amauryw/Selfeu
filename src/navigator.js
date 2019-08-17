@@ -1,3 +1,5 @@
+import React from "react";
+
 import {
   createStackNavigator,
   createBottomTabNavigator
@@ -35,7 +37,7 @@ const tabNavigator = createBottomTabNavigator(
     }
   },
   {
-    initialRouteName: "tasks",
+    initialRouteName: "home",
     tabBarComponent: TabBar,
     headerMode: "none",
     tabBarOptions: {

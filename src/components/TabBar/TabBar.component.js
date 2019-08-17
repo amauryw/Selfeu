@@ -1,19 +1,13 @@
 import React from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Dimensions,
-  StyleSheet
-} from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import posed from "react-native-pose";
 import styled from "styled-components";
 import theme from "../../theme";
+import { MyDevice } from "../../module/device";
 
 const TAB_BAR_HEIGHT = 52;
 
-const windowWidth = Dimensions.get("window").width;
-const tabWidth = windowWidth / 3;
+const tabWidth = MyDevice.windowWidth / 3;
 
 const SpotLight = posed.View({
   route0: { x: 0 },

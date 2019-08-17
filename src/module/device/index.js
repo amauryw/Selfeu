@@ -1,0 +1,1 @@
+export { MyDevice } from "./device";

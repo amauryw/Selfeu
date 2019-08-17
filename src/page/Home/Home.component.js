@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import theme from "../../theme";
 
-export const Home = props => {
+export const Home = () => {
   return (
     <Container>
       <WelcomeText>Ceci est la Home</WelcomeText>

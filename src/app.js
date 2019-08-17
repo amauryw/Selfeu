@@ -1,14 +1,18 @@
 // @flow
-import React, { Component } from "react";
+import React from "react";
 
 import { Navigator } from "./navigator";
+import { UserContextProvider } from "./module/user";
+import { ActionContextProvider } from "./module/action";
 
-type PropsType = {};
-
-class App extends Component<PropsType> {
-  render() {
-    return <Navigator />;
-  }
-}
+const App = props => {
+  return (
+    <UserContextProvider>
+      <ActionContextProvider>
+        <Navigator />
+      </ActionContextProvider>
+    </UserContextProvider>
+  );
+};
 
 export default App;
