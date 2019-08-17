@@ -1,15 +1,17 @@
 import React from "react";
 import styled from "styled-components";
+import { TouchableOpacity } from "react-native";
 import theme from "../../../../theme";
-export const Action = props => {
+
+export const Action = ({ name, onPress }) => {
   return (
-    <ActionContainer>
-      <ActionText>{props.action.name}</ActionText>
+    <ActionContainer onPress={onPress}>
+      <ActionText>{name}</ActionText>
     </ActionContainer>
   );
 };
 
-const ActionContainer = styled.View`
+const ActionContainer = styled(TouchableOpacity)`
   flex-direction: row;
   border-radius: 10px;
   margin: 10px;

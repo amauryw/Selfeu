@@ -7,7 +7,7 @@ import { Toggle } from "./components/Toggle";
 import { useUserStore } from "../../module/user";
 import { useActionStore } from "../../module/action";
 
-export const Actions = () => {
+export const Actions = props => {
   const { isLoading: isUserStoreLoading, users, loadUsers } = useUserStore();
   const {
     isLoading: isActionStoreLoading,
@@ -39,6 +39,10 @@ export const Actions = () => {
     setUserSelection(users.map(user => ({ ...user, selected: false })));
   }, [users]);
 
+  const navToActionDescription = action => {
+    props.navigation.navigate("actionDescription", { action });
+  };
+
   return (
     <Container>
       <ToggleContainer>
@@ -58,7 +62,11 @@ export const Actions = () => {
         ) : (
           <ScrollViewContainer>
             {filteredByUserActions.map(action => (
-              <Action action={action} key={action.id} />
+              <Action
+                name={action.name}
+                key={action.id}
+                onPress={() => navToActionDescription(action)}
+              />
             ))}
           </ScrollViewContainer>
         )}
