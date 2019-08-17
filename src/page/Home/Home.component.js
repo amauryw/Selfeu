@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
+import { ActivityIndicator } from "react-native";
 import theme from "../../theme";
 import { useMyStore } from "../../module/me";
-import { mapComponent } from "../../components/mapComponent";
 
 export const Home = () => {
   const {
@@ -16,6 +16,22 @@ export const Home = () => {
     loadMyMonthlyTodos();
   }, []);
 
+  const renderPersonalActions = () => {
+    if (isMyTodosLoading) {
+      return <Loader color={theme.lightDarkBackground} size={40} />;
+    }
+
+    if (myMonthlyTodos.length <= 0) {
+      return <EmptyText>Bravo, tu as tout fait pour ce mois !</EmptyText>;
+    }
+    return (
+      <React.Fragment>
+        {myMonthlyTodos.map(item => (
+          <PersonalAction key={item.id}>{item.name}</PersonalAction>
+        ))}
+      </React.Fragment>
+    );
+  };
   return (
     <Container>
       <TextContainer>
@@ -26,26 +42,12 @@ export const Home = () => {
 
       <MyMonthlyTodosContainer>
         <MyMonthlyTodosHorizontalContainer>
-          {/* do not reuse this component, that's painful for nothing */}
-          {mapComponent(
-            myMonthlyTodos,
-            personalAction,
-            isMyTodosLoading,
-            emptyComponent
-          )}
+          {renderPersonalActions()}
         </MyMonthlyTodosHorizontalContainer>
       </MyMonthlyTodosContainer>
     </Container>
   );
 };
-
-const personalAction = props => (
-  <PersonalAction>{props.item.name}</PersonalAction>
-);
-
-const emptyComponent = () => (
-  <EmptyText>Bravo, tu as tout fait pour ce mois !</EmptyText>
-);
 
 // level 0
 const Container = styled.View`
@@ -94,3 +96,5 @@ const EmptyText = styled.Text`
   font-size: 20;
   color: ${theme.lightText};
 `;
+
+const Loader = styled(ActivityIndicator)``;
