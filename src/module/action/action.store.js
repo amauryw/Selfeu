@@ -1,4 +1,4 @@
-import { queryActions } from "./action.api";
+import { queryActionsByUserIds } from "./action.api";
 
 import { useState } from "react";
 
@@ -12,7 +12,6 @@ const initialState = {
 export const useActionStore = () => {
   const [state, setState] = useState(initialState);
 
-  const actions = state.actions;
   const isLoading = state.isLoading;
   const filteredByUserActions = state.filteredByUserActions;
   const filteringUserIds = state.filteringUserIds;
@@ -27,19 +26,11 @@ export const useActionStore = () => {
     setState(oldState => ({ ...oldState, isLoading: value }));
   };
 
-  const setActions = newActions => {
-    setState(oldState => ({ ...oldState, actions: newActions }));
-  };
-
   const loadActions = async () => {
     try {
       setLoading(true);
-      const apiActions = await queryActions();
-      const filteredAction = apiActions.filter(action =>
-        filteringUserIds.includes(action.userId)
-      );
-      setActions(apiActions);
-      setFilteredByUserActions(filteredAction);
+      const apiActions = await queryActionsByUserIds(filteringUserIds);
+      setFilteredByUserActions(apiActions);
     } catch (error) {
       console.log("actions could not be loaded", { error });
     } finally {
@@ -47,16 +38,12 @@ export const useActionStore = () => {
     }
   };
 
-  const setFilteringUsersId = userIds => {
-    const filteredAction = actions.filter(action =>
-      userIds.includes(action.userId)
-    );
+  const setFilteringUsersId = async userIds => {
     setState(oldState => ({ ...oldState, filteringUserIds: userIds }));
-    setFilteredByUserActions(filteredAction);
+    await loadActions();
   };
 
   return {
-    actions,
     filteredByUserActions,
     isLoading,
     loadActions,

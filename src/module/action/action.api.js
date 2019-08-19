@@ -1,3 +1,9 @@
+import Axios from "axios";
+import { API_BASE_URL } from "../../constants";
+
+export const queryActionsByUserIds = userIds =>
+  Axios.get(`${API_BASE_URL}/`, { userIds });
+
 export const queryActions = async () =>
   new Promise(resolve =>
     setTimeout(
