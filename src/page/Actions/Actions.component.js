@@ -12,6 +12,7 @@ export const Actions = props => {
   const {
     isLoading: isActionStoreLoading,
     filteredByUserActions,
+    filteringUserIds,
     setFilteringUsersId,
     loadActions
   } = useActionStore();
@@ -32,8 +33,11 @@ export const Actions = props => {
 
   useEffect(() => {
     loadUsers();
-    loadActions();
   }, []);
+
+  useEffect(() => {
+    loadActions();
+  }, [filteringUserIds]);
 
   useEffect(() => {
     setUserSelection(users.map(user => ({ ...user, selected: false })));

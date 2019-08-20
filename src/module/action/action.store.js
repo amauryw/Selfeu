@@ -1,4 +1,4 @@
-import { queryActionsByUserIds } from "./action.api";
+import { queryActionsByUserIds, updateActionById } from "./action.api";
 
 import { useState } from "react";
 
@@ -6,7 +6,8 @@ const initialState = {
   filteredByUserActions: [],
   actions: [],
   filteringUserIds: [],
-  isLoading: false
+  isLoading: false,
+  hasErrored: false
 };
 
 export const useActionStore = () => {
@@ -26,24 +27,41 @@ export const useActionStore = () => {
     setState(oldState => ({ ...oldState, isLoading: value }));
   };
 
-  const loadActions = async () => {
+  const setHasErrored = value => {
+    setState(oldState => ({ ...oldState, hasErrored: value }));
+  };
+  const executeAction = async (actionId, doneValue) => {
     try {
       setLoading(true);
-      const apiActions = await queryActionsByUserIds(filteringUserIds);
-      setFilteredByUserActions(apiActions);
+      await updateActionById(actionId, doneValue);
     } catch (error) {
-      console.log("actions could not be loaded", { error });
+      console.log("actions could not be executed", { error });
     } finally {
       setLoading(false);
     }
   };
 
-  const setFilteringUsersId = async userIds => {
+  const loadActions = async () => {
+    try {
+      setLoading(true);
+      setHasErrored(false);
+      const apiActions = await queryActionsByUserIds(filteringUserIds);
+      setFilteredByUserActions(apiActions);
+    } catch (error) {
+      console.log("actions could not be loaded", { error });
+      setHasErrored(true);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const setFilteringUsersId = userIds => {
     setState(oldState => ({ ...oldState, filteringUserIds: userIds }));
-    await loadActions();
   };
 
   return {
+    executeAction,
+    filteringUserIds,
     filteredByUserActions,
     isLoading,
     loadActions,

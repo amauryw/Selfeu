@@ -10,6 +10,7 @@ import Animated, {
   Easing
 } from "react-native-reanimated";
 import { runTiming, bInterpolate, max } from "react-native-redash";
+import { DoItButton } from "./components/DoItButton";
 
 const {
   Value,
@@ -197,7 +198,7 @@ export const MyTodos = ({ cards }) => {
         ))}
       </ListSelection>
       <ButtonContainer>
-        <DoItButton title="Do it" />
+        <DoItButton actionId={cards[selectedCardIndex].id} />
       </ButtonContainer>
     </Container>
   );
@@ -208,7 +209,6 @@ const Container = styled(Transitioning.View)`
   flex: 1;
 `;
 
-const DoItButton = styled.Button``;
 const ButtonContainer = styled.View`
   justify-content: center;
   align-items: center;

@@ -56,6 +56,7 @@ export const Navigator = createStackNavigator(
   {
     launch: tabNavigator,
     taskDescription: TaskDescription,
+    doTask: DoTask,
     actionDescription: ActionDescription
   },
   {

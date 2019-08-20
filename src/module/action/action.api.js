@@ -4,6 +4,9 @@ import { API_BASE_URL } from "../../constants";
 export const queryActionsByUserIds = userIds =>
   Axios.get(`${API_BASE_URL}/`, { userIds });
 
+export const updateActionById = (actionId, doneValue) =>
+  Axios.post(`${API_BASE_URL}/`, { actionId, doneValue });
+
 export const queryActions = async () =>
   new Promise(resolve =>
     setTimeout(

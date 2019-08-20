@@ -1,7 +1,7 @@
 import Axios from "axios";
 import { API_BASE_URL } from "../../constants";
 
-export const queryUsers = () => Axios.get(`${API_BASE_URL}/`);
+export const queryUsers = () => Axios.get(`${API_BASE_URL}`);
 
 // export const queryUsers = async () =>
 //   new Promise(resolve =>
